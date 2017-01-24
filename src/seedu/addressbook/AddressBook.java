@@ -222,18 +222,17 @@ public class AddressBook {
             setupDefaultFileForStorage();
         }
         
-        loadDataFromStorage();
-        executeUserCommand();
-    }
-
-	private static void executeUserCommand() {
-		while (true) {
+        initialiseAddressBookModel(loadPersonsFromFile(storageFilePath));
+        
+    	while (true) {
             String userCommand = getUserInput();
             echoUserCommand(userCommand);
             String feedback = executeCommand(userCommand);
             showResultToUser(feedback);
-        }
-	}
+            
+    	}
+    }
+
 
     /*
      * NOTE : =============================================================
@@ -339,14 +338,6 @@ public class AddressBook {
     private static boolean hasValidFileName(Path filePath) {
         return filePath.getFileName().toString().lastIndexOf('.') > 0
                 && (!Files.exists(filePath) || Files.isRegularFile(filePath));
-    }
-
-    /**
-     * Initialises the in-memory data using the storage file.
-     * Assumption: The file exists.
-     */
-    private static void loadDataFromStorage() {
-        initialiseAddressBookModel(loadPersonsFromFile(storageFilePath));
     }
 
 
