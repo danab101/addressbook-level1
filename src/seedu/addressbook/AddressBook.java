@@ -142,10 +142,13 @@ public class AddressBook {
 	 * used by the internal String[] storage format.
 	 * For example, a person's name is stored as the 0th element in the array.
 	 */
+	
+	
 	private static final int PERSON_DATA_INDEX_NAME = 0;
 	private static final int PERSON_DATA_INDEX_PHONE = 1;
 	private static final int PERSON_DATA_INDEX_EMAIL = 2;
 	private static final int NUM_ARGUMENTS = 3;
+	
 
 	/**
 	 * The number of data elements for a single person.
@@ -965,7 +968,7 @@ public class AddressBook {
 	private static boolean isPersonDataExtractableFrom(String personData) {
 		final String matchAnyPersonDataPrefix = PERSON_DATA_PREFIX_PHONE + '|' + PERSON_DATA_PREFIX_EMAIL;
 		final String[] splitArgs = personData.trim().split(matchAnyPersonDataPrefix);
-		return splitArgs.length == NUM_ARGUMENTS // 3 arguments make constant 
+		return splitArgs.length == NUM_ARGUMENTS
 				&& !splitArgs[0].isEmpty() // non-empty arguments
 				&& !splitArgs[1].isEmpty()
 				&& !splitArgs[2].isEmpty();
