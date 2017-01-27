@@ -142,13 +142,13 @@ public class AddressBook {
 	 * used by the internal String[] storage format.
 	 * For example, a person's name is stored as the 0th element in the array.
 	 */
-	
-	
+
+
 	private static final int PERSON_DATA_INDEX_NAME = 0;
 	private static final int PERSON_DATA_INDEX_PHONE = 1;
 	private static final int PERSON_DATA_INDEX_EMAIL = 2;
 	private static final int NUM_ARGUMENTS = 3;
-	
+
 
 	/**
 	 * The number of data elements for a single person.
@@ -488,16 +488,20 @@ public class AddressBook {
 	}
 
 	/**
-	 * Retrieves all persons in the full model whose names contain some of the specified keywords.
+	 * Retrieves all persons in the full model whose names contain some of the specified keywords in lower case.
 	 *
 	 * @param keywords for searching
-	 * @return list of persons in full model with name containing some of the keywords
+	 * @return list of persons in full model with name containing some of the keywords in lower case.
 	 */
 	private static ArrayList<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
+		Collection<String> lower_case = new ArrayList<String>();
+		for (String keyword : keywords) {
+			lower_case.add(keyword.toLowerCase());
+		}
 		final ArrayList<String[]> matchedPersons = new ArrayList<>();
 		for (String[] person : getAllPersonsInAddressBook()) {
-			final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
-			if (!Collections.disjoint(wordsInName, keywords)) {
+			final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person).toLowerCase()));
+			if (!Collections.disjoint(wordsInName, lower_case)) {
 				matchedPersons.add(person);
 			}
 		}
